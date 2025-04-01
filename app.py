@@ -58,6 +58,22 @@ def deleteBridges():
     return response.json(), response.status_code
 
 
+#CRUD - Port interfaces
+
+#Read
+@app.get("/rest/interface/bridge/port")
+def getPorts():
+    bridgeName = request.args.get('bridge');
+    if(bridgeName != None):
+        api_url = "http://"+ routerip +"/rest/interface/bridge/port?bridge="+bridgeName
+    else:
+        api_url = "http://"+ routerip +"/rest/interface/bridge/port"
+    response = requests.get(api_url, auth=auth)
+    return response.json(), response.status_code
+
+
+
+
 #CRUD - Security profiles
 
 #Read
