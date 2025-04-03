@@ -53,9 +53,9 @@ def patchBridges():
 @app.delete("/rest/interface/bridge")
 def deleteBridges():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/interface/bridge/*"+id
+    api_url = "http://"+ routerip +"/rest/interface/bridge/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status_code
+    return '', response.status_code
 
 
 #CRUD - Port interfaces
@@ -71,6 +71,14 @@ def getPorts():
     response = requests.get(api_url, auth=auth)
     return response.json(), response.status_code
 
+#Delete
+@app.delete("/rest/interface/bridge/port")
+def deletePorts():
+    id = request.args.get('id')
+    api_url = "http://"+ routerip +"/rest/interface/bridge/port/"+id
+    response = requests.delete(api_url, auth=auth)
+    return '', response.status_code
+#
 
 
 
