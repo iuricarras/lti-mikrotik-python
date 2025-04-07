@@ -5,8 +5,19 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-routerip = "192.168.204.254"
-auth = ('admin','ubuntu')
+routerip = "" # "192.168.20.176"
+auth = ("","")  #('admin','ubuntu')
+
+
+#Set login credentials
+@app.post('/login')
+def login():
+    global routerip
+    global auth
+    body = request.get_json()
+    routerip = body['ip']
+    auth = (body['username'], body['password'])
+    return jsonify({"status": "success"}), 200
 
 #Get all interfaces from the device
 @app.get("/rest/interface")
@@ -78,8 +89,6 @@ def deletePorts():
     api_url = "http://"+ routerip +"/rest/interface/bridge/port/"+id
     response = requests.delete(api_url, auth=auth)
     return '', response.status_code
-#
-
 
 
 #CRUD - Security profiles
