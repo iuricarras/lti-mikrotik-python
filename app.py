@@ -55,7 +55,7 @@ def putBridges():
 @app.patch("/rest/interface/bridge")
 def patchBridges():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/interface/bridge/*"+id
+    api_url = "http://"+ routerip +"/rest/interface/bridge/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
     return response.json(), response.status_code
@@ -69,6 +69,34 @@ def deleteBridges():
     return '', response.status_code
 
 
+#Wireless interfaces
+
+#Enable wireless interfaces
+@app.post("/rest/interface/wireless/enable")
+def enableWireless():
+    api_url = "http://"+ routerip +"/rest/interface/wireless/enable"
+    body = request.get_json()
+    response = requests.post(api_url, auth=auth, data=json.dumps(body), headers={'content-type':'application/json'})
+    return '', response.status_code
+
+#Disable wireless interfaces
+@app.post("/rest/interface/wireless/disable")
+def disableWireless():
+    body = request.get_json()
+    api_url = "http://"+ routerip +"/rest/interface/wireless/disable"
+    response = requests.post(api_url, auth=auth, data=json.dumps(body), headers={'content-type':'application/json'})
+    return '', response.status_code
+
+#Update
+@app.patch("/rest/interface/wireless")
+def patchWireless():    
+    id = request.args.get('id')
+    api_url = "http://"+ routerip +"/rest/interface/wireless/"+id
+    body = request.get_json()
+    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    return response.json(), response.status_code
+
+
 #CRUD - Port interfaces
 
 #Read
@@ -80,6 +108,14 @@ def getPorts():
     else:
         api_url = "http://"+ routerip +"/rest/interface/bridge/port"
     response = requests.get(api_url, auth=auth)
+    return response.json(), response.status_code
+
+#Create
+@app.put("/rest/interface/bridge/port")
+def insertPorts():
+    api_url = "http://"+ routerip + "/rest/interface/bridge/port"
+    body = request.get_json()
+    response = requests.put(api_url, auth=auth, headers={'content-type':'application/json'}, data=json.dumps(body))
     return response.json(), response.status_code
 
 #Delete
@@ -98,7 +134,7 @@ def deletePorts():
 def getSecurityProfiles():
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Create
 @app.put("/rest/interface/wireless/security-profiles")
@@ -106,24 +142,24 @@ def putSecurityProfiles():
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles"
     body = request.get_json()
     response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/interface/wireless/security-profiles")
 def patchSecurityProfiles():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/*"+id
+    api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Delete
 @app.delete("/rest/interface/wireless/security-profiles")
 def deleteSecurityProfiles():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/*"+id
+    api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status
+    return '' , response.status_code
 
 
 #CRUD - Static routes
@@ -133,7 +169,7 @@ def deleteSecurityProfiles():
 def getStaticRoutes():
     api_url = "http://"+ routerip +"/rest/ip/route"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Create
 @app.put("/rest/ip/route")
@@ -141,24 +177,24 @@ def putStaticRoutes():
     api_url = "http://"+ routerip +"/rest/ip/route"
     body = request.get_json()
     response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/ip/route")
 def patchStaticRoutes():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/route/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/route/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Delete
 @app.delete("/rest/ip/route")
 def deleteStaticRoutes():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/route/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/route/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status
+    return '', response.status_code
 
 
 #CRUD - IP addresses
@@ -168,7 +204,7 @@ def deleteStaticRoutes():
 def getAddresses():
     api_url = "http://"+ routerip +"/rest/ip/address"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response
+    return response.json(), response.status_code
 
 #Create
 @app.put("/rest/ip/address")
@@ -176,24 +212,24 @@ def putAddresses():
     api_url = "http://"+ routerip +"/rest/ip/address"
     body = request.get_json()
     response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/ip/address")
 def patchAddresses():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/address/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/address/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Delete
 @app.delete("/rest/ip/address")
 def deleteAddresses():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/address/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/address/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status
+    return '', response.status_code
 
 
 #CRUD - DHCP server
@@ -203,7 +239,7 @@ def deleteAddresses():
 def getDHCPServer():
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Create
 @app.put("/rest/ip/dhcp-server")
@@ -211,24 +247,24 @@ def putDHCPServer():
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server"
     body = request.get_json()
     response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/ip/dhcp-server")
 def patchDHCPServer():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/dhcp-server/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/dhcp-server/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Delete
 @app.delete("/rest/ip/dhcp-server")
 def deleteDHCPServer():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/dhcp-server/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/dhcp-server/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status
+    return '', response.status_code
 
 #CRUD - DHCP pools
 
@@ -237,7 +273,7 @@ def deleteDHCPServer():
 def getDHCPPools():
     api_url = "http://"+ routerip +"/rest/ip/pool"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response
+    return response.json(), response.status_code
 
 #Create
 @app.put("/rest/ip/pool")
@@ -245,24 +281,24 @@ def putDHCPPools():
     api_url = "http://"+ routerip +"/rest/ip/pool"
     body = request.get_json()
     response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/ip/pool")
 def patchDHCPPools():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/pool/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/pool/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response
+    return response.json(), response.status_code
 
 #Delete
 @app.delete("/rest/ip/pool")
 def deleteDHCPPools():
     id = request.args.get('id')
-    api_url = "http://"+ routerip +"/rest/ip/pool/*"+id
+    api_url = "http://"+ routerip +"/rest/ip/pool/"+id
     response = requests.delete(api_url, auth=auth)
-    return response.json(), response.status
+    return '', response.status_code
 
 
 #Activate/Deactivate/Configure DNS server
@@ -272,17 +308,15 @@ def deleteDHCPPools():
 def getDNS():
     api_url = "http://"+ routerip +"/rest/ip/dns"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response.status
+    return response.json(), response.status_code
 
 #Update
-@app.patch("/rest/ip/dns")
-def patchDNS():
-    api_url = "http://"+ routerip +"/rest/ip/dns"
+@app.post("/rest/ip/dns/set")
+def postDNS():
+    api_url = "http://"+ routerip +"/rest/ip/dns/set"
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
-
-
+    response = requests.post(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    return response.json(), response.status_code
 #Activate/Deactivate/Configure DNS static entries
 
 #Read
@@ -290,12 +324,21 @@ def patchDNS():
 def getDNSStatic():
     api_url = "http://"+ routerip +"/rest/ip/dns/static"
     response = requests.get(api_url, auth=auth)
-    return response.json(), response.status
+    return response.json(), response.status_code
+
+#Create
+@app.put("/rest/ip/dns/static")
+def putDNSStatic():
+    api_url = "http://"+ routerip +"/rest/ip/dns/static"
+    body = request.get_json()
+    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    return response.json(), response.status_code
 
 #Update
 @app.patch("/rest/ip/dns/static")
 def patchDNSStatic():
-    api_url = "http://"+ routerip +"/rest/ip/dns/static"
+    id = request.args.get('id')
+    api_url = "http://"+ routerip +"/rest/ip/dns/static/"+id
     body = request.get_json()
     response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
-    return response.json(), response.status
+    return response.json(), response.status_code
