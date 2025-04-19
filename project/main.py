@@ -46,7 +46,7 @@ def putBridges():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/interface/bridge"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'mainlication/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -57,7 +57,7 @@ def patchBridges():
     authentication = current_app.config.get('AUTHENTICATION')    
     api_url = "http://"+ routerip +"/rest/interface/bridge/*"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'mainlication/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
     
 #Delete
