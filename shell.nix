@@ -7,7 +7,17 @@ in pkgs.mkShell {
       python-pkgs.requests
       python-pkgs.flask
       python-pkgs.flask-cors
+      python-pkgs.flask-sqlalchemy
+      python-pkgs.flask-login
+      python-pkgs.cryptography
+      python-pkgs.python-dotenv
     ]))
   ];
+
+  shellHook =
+  ''
+    export FLASK_APP=project
+    export FLASK_DEBUG=1
+  '';
 }
 

@@ -1,0 +1,2 @@
+routerip = ''
+authentication = ('', '')
