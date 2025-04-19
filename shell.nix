@@ -12,6 +12,7 @@ in pkgs.mkShell {
       python-pkgs.cryptography
       python-pkgs.python-dotenv
     ]))
+    pkgs.openssl
   ];
 
   shellHook =

@@ -81,7 +81,7 @@ def enableWireless():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/interface/wireless/enable"
     body = request.get_json()
-    response = requests.post(api_url, auth=auth, data=json.dumps(body), headers={'content-type':'application/json'})
+    response = requests.post(api_url, auth=authentication, data=json.dumps(body), headers={'content-type':'application/json'})
     return '', response.status_code
 
 #Disable wireless interfaces
@@ -91,7 +91,7 @@ def disableWireless():
     authentication = current_app.config.get('AUTHENTICATION')
     body = request.get_json()
     api_url = "http://"+ routerip +"/rest/interface/wireless/disable"
-    response = requests.post(api_url, auth=auth, data=json.dumps(body), headers={'content-type':'application/json'})
+    response = requests.post(api_url, auth=authentication, data=json.dumps(body), headers={'content-type':'application/json'})
     return '', response.status_code
 
 #Update
@@ -102,7 +102,7 @@ def patchWireless():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/interface/wireless/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 
@@ -118,7 +118,7 @@ def getPorts():
         api_url = "http://"+ routerip +"/rest/interface/bridge/port?bridge="+bridgeName
     else:
         api_url = "http://"+ routerip +"/rest/interface/bridge/port"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -128,7 +128,7 @@ def insertPorts():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip + "/rest/interface/bridge/port"
     body = request.get_json()
-    response = requests.put(api_url, auth=auth, headers={'content-type':'application/json'}, data=json.dumps(body))
+    response = requests.put(api_url, auth=authentication, headers={'content-type':'application/json'}, data=json.dumps(body))
     return response.json(), response.status_code
 
 #Delete
@@ -138,7 +138,7 @@ def deletePorts():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/interface/bridge/port/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '', response.status_code
 
 
@@ -150,7 +150,7 @@ def getSecurityProfiles():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -160,7 +160,7 @@ def putSecurityProfiles():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -171,7 +171,7 @@ def patchSecurityProfiles():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Delete
@@ -181,7 +181,7 @@ def deleteSecurityProfiles():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/interface/wireless/security-profiles/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '' , response.status_code
 
 
@@ -193,7 +193,7 @@ def getStaticRoutes():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/route"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -203,7 +203,7 @@ def putStaticRoutes():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/route"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -214,7 +214,7 @@ def patchStaticRoutes():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/route/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Delete
@@ -224,7 +224,7 @@ def deleteStaticRoutes():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/route/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '', response.status_code
 
 
@@ -236,7 +236,7 @@ def getAddresses():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/address"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -246,7 +246,7 @@ def putAddresses():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/address"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -257,7 +257,7 @@ def patchAddresses():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/address/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Delete
@@ -267,7 +267,7 @@ def deleteAddresses():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/address/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '', response.status_code
 
 
@@ -279,7 +279,7 @@ def getDHCPServer():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -289,7 +289,7 @@ def putDHCPServer():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -300,7 +300,7 @@ def patchDHCPServer():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Delete
@@ -310,7 +310,7 @@ def deleteDHCPServer():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/dhcp-server/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '', response.status_code
 
 #CRUD - DHCP pools
@@ -321,7 +321,7 @@ def getDHCPPools():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/pool"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -331,7 +331,7 @@ def putDHCPPools():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/pool"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -342,7 +342,7 @@ def patchDHCPPools():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/pool/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Delete
@@ -352,7 +352,7 @@ def deleteDHCPPools():
     authentication = current_app.config.get('AUTHENTICATION')
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/pool/"+id
-    response = requests.delete(api_url, auth=auth)
+    response = requests.delete(api_url, auth=authentication)
     return '', response.status_code
 
 
@@ -364,7 +364,7 @@ def getDNS():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dns"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Update
@@ -374,7 +374,7 @@ def postDNS():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dns/set"
     body = request.get_json()
-    response = requests.post(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.post(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 #Activate/Deactivate/Configure DNS static entries
 
@@ -384,7 +384,7 @@ def getDNSStatic():
     routerip = current_app.config.get('ROUTER_IP')
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dns/static"
-    response = requests.get(api_url, auth=auth)
+    response = requests.get(api_url, auth=authentication)
     return response.json(), response.status_code
 
 #Create
@@ -394,7 +394,7 @@ def putDNSStatic():
     authentication = current_app.config.get('AUTHENTICATION')
     api_url = "http://"+ routerip +"/rest/ip/dns/static"
     body = request.get_json()
-    response = requests.put(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.put(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 #Update
@@ -405,7 +405,7 @@ def patchDNSStatic():
     id = request.args.get('id')
     api_url = "http://"+ routerip +"/rest/ip/dns/static/"+id
     body = request.get_json()
-    response = requests.patch(api_url, data=json.dumps(body), auth=auth, headers={'content-type':'application/json'})
+    response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'})
     return response.json(), response.status_code
 
 
