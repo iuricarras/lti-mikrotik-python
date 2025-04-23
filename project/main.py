@@ -299,6 +299,18 @@ def patchDNSStatic():
 
 
 #Wireguard
+#CRUD - Wireguard interfaces
+#Get all wireguard interfaces
+@main.get("/rest/interface/wireguard")
+def getWireguardInterfaces():
+    responseJson, responseStatusCode = apiRequest("/rest/interface/wireguard", "GET")
+    return responseJson, responseStatusCode
+
+#Create wireguard interfaces
+@main.put("/rest/interface/wireguard")
+def putWireguardInterfaces():
+    responseJson, responseStatusCode = apiRequest("/rest/interface/wireguard", "PUT", request.get_json())
+    return responseJson, responseStatusCode
 
 #Get Peers
 @main.get("/rest/interface/wireguard/peers")
