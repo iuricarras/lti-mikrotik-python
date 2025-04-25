@@ -22,6 +22,7 @@ def apiRequest(url, method, body=None):
         response = requests.patch(api_url, data=json.dumps(body), auth=authentication, headers={'content-type':'application/json'}, verify=False)
     elif method == 'DELETE':
         response = requests.delete(api_url, auth=authentication, verify=False)
+        return '', response.status_code
     return response.json(), response.status_code
 
 #Get all interfaces from the device
