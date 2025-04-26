@@ -96,8 +96,8 @@ The secret key needs to be a 32 bytes base64 string. You can generate a random s
 ### Running the Project
 To start the Flask development server:
 ```sh
-export FLASK_APP=project
-export FLASK_DEBUG=1
+export FLASK_APP=project # On Windows, use $env:FLASK_APP = "project"
+export FLASK_DEBUG=1 # On Windows, use $env:FLASK_DEBUG = "1"
 flask run
 ```
 The server will be available at `http://127.0.0.1:5000`.
