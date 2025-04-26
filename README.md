@@ -2,7 +2,7 @@
 
 > ⚠️ **Warning**: This project is an **academic project** and is intended for educational purposes only. It may not cover all edge cases or advanced Mikrotik configurations.
 
-This project is a Python-based middleware for managing Mikrotik routers. It provides a RESTful API to interact with Mikrotik devices, enabling functionalities such as interface management, peer configuration, and network monitoring. It is designed to work seamlessly with a Vue.js-based frontend.
+This project is a Python-based middleware for managing Mikrotik routers. It provides a RESTful API to interact with Mikrotik devices, enabling functionalities such as interface management, peer configuration, and network monitoring. It is designed to work seamlessly with the [lti-mikrotik](https://github.com/iuricarras/lti-mikrotik) Vue.js-based frontend.
 
 ## Main Functionalities
 
