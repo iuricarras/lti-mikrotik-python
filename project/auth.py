@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import os
 from .config import routerip, authentication
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, url_prefix='/api')
 
 load_dotenv()
 

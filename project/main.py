@@ -6,7 +6,7 @@ import json
 from . import db
 
 
-main = Blueprint('main', __name__)
+main = Blueprint('main', __name__, url_prefix='/api')
 
 def apiRequest(url, method, body=None):
     routerip = current_app.config.get('ROUTER_IP')
