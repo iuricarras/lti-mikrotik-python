@@ -2,17 +2,21 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import os
-
+from dotenv import load_dotenv
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 
 from . import models
 
+load_dotenv()
+
+key = os.getenv('SECRETKEY')
+
 def create_app():
     app = Flask(__name__)
     CORS(app)
     
-    app.config['SECRET_KEY'] = 'your_secret_key'
+    app.config['SECRET_KEY'] = key
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     db.init_app(app)
