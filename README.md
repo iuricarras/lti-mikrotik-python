@@ -60,7 +60,7 @@ Follow these steps to set up the backend:
     SECRETKEY=your_secret_key
     ```
 The secret key needs to be a 32 bytes base64 string. You can generate a random string using the `openssl` command:
-    ```sh
+    ```
     openssl rand -base64 32
     ```
 
