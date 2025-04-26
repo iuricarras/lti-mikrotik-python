@@ -39,11 +39,14 @@ Follow these steps to set up the backend:
 
 ### Installation
 
+#### Using Virtual Environment
+
 1. Clone the repository:
    ```sh
    git clone https://github.com/iuricarras/lti-mikrotik-python.git
    cd lti-mikrotik-python
    ```
+
 2. Set up a virtual environment:  
     ```sh
     python -m venv venv
@@ -57,12 +60,38 @@ Follow these steps to set up the backend:
 
 4. Set up the environment variables: Create a .env file in the root directory and add the following: 
     ```sh
-    SECRETKEY=your_secret_key
+    SECRETKEY=<your_secret_key>
     ```
 The secret key needs to be a 32 bytes base64 string. You can generate a random string using the `openssl` command:
     ```
     openssl rand -base64 32
     ```
+
+
+#### Using Nix Shell
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/iuricarras/lti-mikrotik-python.git
+   cd lti-mikrotik-python
+   ```
+
+2. Enter the Nix shell: 
+    ```sh
+    nix-shell
+    ```
+
+3. Set up the environment variables: Create a .env file in the root directory and add the following: 
+    ```sh
+    SECRETKEY=<your_secret_key>
+    ```
+The secret key needs to be a 32 bytes base64 string. You can generate a random string using the `openssl` command:
+    ```
+    openssl rand -base64 32
+    ```
+
+
+
 
 ### Running the Project
 To start the Flask development server:
